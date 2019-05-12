@@ -14,6 +14,26 @@ ComplexNumber::ComplexNumber( float realPart, float imaginaryPart )
 }
 
 //--------------------------------------------
+float ComplexNumber::getRealPart()
+{
+	return this->realPart;
+}
+
+//--------------------------------------------
+float ComplexNumber::getImaginaryPart()
+{
+	return this->imaginaryPart;
+}
+
+void ComplexNumber::setRealPart( float realPart )
+{
+	this->realPart = realPart;
+}
+void ComplexNumber::setImaginaryPart( float imaginaryPart )
+{
+	this->imaginaryPart = imaginaryPart;
+}
+//--------------------------------------------
 void ComplexNumber::Write()
 {
 	if( this->imaginaryPart > 2e-14 )
@@ -23,39 +43,39 @@ void ComplexNumber::Write()
 }
 
 //------------------------------------------
-ComplexNumber operator +( const ComplexNumber & number1, const ComplexNumber & number2 )
+ComplexNumber operator +( ComplexNumber & number1, ComplexNumber & number2 )
 {
-	return ComplexNumber( number1.realPart + number2.realPart, number1.imaginaryPart + number2.imaginaryPart );
+	return ComplexNumber( number1.getRealPart() + number2.getRealPart(), number1.getImaginaryPart() + number2.getImaginaryPart() );
 }
 
 //--------------------------------------------
-ComplexNumber operator -( const ComplexNumber & number1, const ComplexNumber & number2 )
+ComplexNumber operator -( ComplexNumber & number1, ComplexNumber & number2 )
 {
-	return ComplexNumber( number1.realPart - number2.realPart, number1.imaginaryPart - number2.imaginaryPart );
+	return ComplexNumber( number1.getRealPart() - number2.getRealPart(), number1.getImaginaryPart() - number2.getImaginaryPart() );
 }
 
 //--------------------------------------------
-ComplexNumber operator *( const ComplexNumber & number1, const ComplexNumber & number2 )
+ComplexNumber operator *( ComplexNumber & number1, ComplexNumber & number2 )
 {
-	float realPart = ( number1.realPart * number2.realPart ) + -( number1.imaginaryPart * number2.imaginaryPart );
-	float imaginaryPart = ( number1.realPart * number2.imaginaryPart ) + ( number1.imaginaryPart * number2.realPart );
+	float realPart = ( number1.getRealPart() * number2.getRealPart() ) + -( number1.getImaginaryPart() * number2.getImaginaryPart() );
+	float imaginaryPart = ( number1.getRealPart() * number2.getImaginaryPart() ) + ( number1.getImaginaryPart() * number2.getRealPart() );
 
 	return ComplexNumber( realPart, imaginaryPart );
 }
 
 //--------------------------------------------
-ComplexNumber operator /( const ComplexNumber & number1, const ComplexNumber & number2 )
+ComplexNumber operator /( ComplexNumber & number1, ComplexNumber & number2 )
 {
 	float realPart, imaginaryPart, dominator;
 	ComplexNumber numerator;
+	
+	numerator.setRealPart( ( number1.getRealPart() * number2.getRealPart() ) + -( number1.getImaginaryPart() * -number2.getImaginaryPart() ) );
+	numerator.setImaginaryPart( ( number1.getRealPart() * -number2.getImaginaryPart() ) + ( number1.getImaginaryPart() * number2.getRealPart() ) );
 
-	numerator.realPart = ( number1.realPart * number2.realPart ) + -( number1.imaginaryPart * -number2.imaginaryPart );
-	numerator.imaginaryPart = ( number1.realPart * -number2.imaginaryPart ) + ( number1.imaginaryPart * number2.realPart );
+	dominator = pow( number2.getRealPart(), 2 ) + pow( number2.getImaginaryPart(), 2 );
 
-	dominator = pow( number2.realPart, 2 ) + pow( number2.imaginaryPart, 2 );
-
-	realPart = numerator.realPart / dominator;
-	imaginaryPart = numerator.imaginaryPart / dominator;
+	realPart = numerator.getRealPart() / dominator;
+	imaginaryPart = numerator.getImaginaryPart() / dominator;
 
 	return ComplexNumber( realPart, imaginaryPart );
 }

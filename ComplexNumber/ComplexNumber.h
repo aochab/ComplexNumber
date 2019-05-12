@@ -7,16 +7,21 @@
 
 class ComplexNumber
 {
-	public:
+private:
 	float realPart;
 	float imaginaryPart;
 
+public:
 	ComplexNumber();
 	ComplexNumber( float realPart, float imaginaryPart );
+	float getRealPart();
+	float getImaginaryPart();
+	void setRealPart( float realPart );
+	void setImaginaryPart( float imaginaryPart );
 	void Write();
 };
 
-ComplexNumber operator +( const ComplexNumber & number1, const ComplexNumber & number2 );
-ComplexNumber operator -( const ComplexNumber & number1, const ComplexNumber & number2 );
-ComplexNumber operator *( const ComplexNumber & number1, const ComplexNumber & number2 );
-ComplexNumber operator /( const ComplexNumber & number1, const ComplexNumber & number2 );
+ComplexNumber operator +( ComplexNumber & number1, ComplexNumber & number2 );
+ComplexNumber operator -( ComplexNumber & number1, ComplexNumber & number2 );
+ComplexNumber operator *( ComplexNumber & number1, ComplexNumber & number2 );
+ComplexNumber operator /( ComplexNumber & number1, ComplexNumber & number2 );
