@@ -25,14 +25,18 @@ float ComplexNumber::getImaginaryPart()
 	return this->imaginaryPart;
 }
 
+//--------------------------------------------
 void ComplexNumber::setRealPart( float realPart )
 {
 	this->realPart = realPart;
 }
+
+//--------------------------------------------
 void ComplexNumber::setImaginaryPart( float imaginaryPart )
 {
 	this->imaginaryPart = imaginaryPart;
 }
+
 //--------------------------------------------
 void ComplexNumber::Write()
 {
